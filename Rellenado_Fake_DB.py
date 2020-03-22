@@ -59,8 +59,8 @@ class Datos_Usuario_Fake:
         self.EDAD = ""
         self.myDB = mysql.connector.connect(
             host = "192.168.1.104",
-            user = "cel_sergio",
-            password = "Saav260230"
+            user = "consultor",
+            password = "consultorpass"
         )
         self.cursor = self.myDB.cursor()
         self.VH, self.VPH = self.GetVectoresNombre("H")
@@ -144,33 +144,11 @@ class Datos_Usuario_Fake:
         # diferencia entre (Fecha de ingreso - 20 años)
         # randint este valor hasta (60)
 
+#*********Test of Class Usuario_Fake*********#
 # Usuario = Usuario_Fake()
 # print(Usuario)
 
-Values = []
-myDB = mysql.connector.connect(
-    host = "192.168.1.104",
-    user = "cel_sergio",
-    password = "Saav260230"
-)
+#*********Test of Class Datos_Usuarios_Fake*********#
+# Datos = Datos_Usuario_Fake
+# Datos.NuevosDatos("S277891")
 
-cursor = myDB.cursor()
-cursos2  =  myDB.cursor()
-cursor.execute("Use Banco;")
-
-cursor.execute("SELECT ID from Usuarios;")
-Datos = Datos_Usuario_Fake()
-Ids = [i for i in cursor]
-for i in Ids:
-    id_s = i[0]
-    Datos.NuevosDatos(id_s)
-    Values.append((str(id_s), str(Datos.NOMBRE), str(Datos.APELLIDOS), str(Datos.GENERO), str(Datos.FECHA_NAC)))
-cursor.execute("Use Banco;")
-sql = """INSERT INTO Datos_Usuarios(ID, NOMBRE, APELLIDOS, GENERO, FECHA_NACIMIENTO) 
-        VALUES ((SELECT ID FROM Usuarios WHERE ID = %s), %s, %s, %s, %s) """
-vals = Values
-print(Values[0])
-pass
-cursor.executemany(sql, vals)
-print("Insertados {}".format(cursor.rowcount))
-myDB.commit()
