@@ -35,4 +35,4 @@ For the date of birth column, it was a bit different. I took the date when start
 
 Finally, I practice with that databases creating Query each time more complex and you can see that in the scripts that start with the name "ConsultasMySQL".
 
-.SaaV
+...SaaV
